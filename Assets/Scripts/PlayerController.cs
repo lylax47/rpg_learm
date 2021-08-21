@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 bottomLeftLimit;
     private Vector3 topRightLimit;
 
+    public bool canMove = true;
+
     public static PlayerController instance;
 
     // Start is called before the first frame update
@@ -31,15 +33,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        plyr.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * moveSpeed;
+        if(canMove)
+        {
+            plyr.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * moveSpeed;
 
-        anim.SetFloat("moveX", Input.GetAxisRaw("Horizontal"));
-        anim.SetFloat("moveY", Input.GetAxisRaw("Vertical"));
-
-        if(System.Math.Abs(Input.GetAxisRaw("Horizontal")) == 1 || System.Math.Abs(Input.GetAxisRaw("Vertical")) == 1){
-            anim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
-            anim.SetFloat("lastMoveY", Input.GetAxisRaw("Vertical"));
+            anim.SetFloat("moveX", Input.GetAxisRaw("Horizontal"));
+            anim.SetFloat("moveY", Input.GetAxisRaw("Vertical"));
+        } else
+        {
+            plyr.velocity = Vector2.zero;
         }
+        
+        if(System.Math.Abs(Input.GetAxisRaw("Horizontal")) == 1 || System.Math.Abs(Input.GetAxisRaw("Vertical")) == 1){
+            if(canMove)
+            {
+                anim.SetFloat("lastMoveX", Input.GetAxisRaw("Horizontal"));
+                anim.SetFloat("lastMoveY", Input.GetAxisRaw("Vertical"));
+            }
+        }
+
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, bottomLeftLimit.x, topRightLimit.x), Mathf.Clamp(transform.position.y, bottomLeftLimit.y, topRightLimit.y), transform.position.z);
     }
 

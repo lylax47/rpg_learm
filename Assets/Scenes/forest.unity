@@ -1228,7 +1228,7 @@ PrefabInstance:
     - target: {fileID: 2137254675052568403, guid: a7f74ed364d274a40b451571418a9bea, type: 3}
       propertyPath: UIImage
       value: 
-      objectReference: {fileID: 8871874382294569186, guid: 21c5da7bde8bc8d4aa0c6f2514483bf5, type: 3}
+      objectReference: {fileID: 2074435280886636600, guid: a1097affb225356409597a6da73f0538, type: 3}
     - target: {fileID: 7214352101105378817, guid: a7f74ed364d274a40b451571418a9bea, type: 3}
       propertyPath: m_RootOrder
       value: 4
